@@ -12,12 +12,12 @@ struct C.GOptionGroup
 struct C.GError
 struct C.gchar
 struct C.GSList {
-data voidptr
-next &GSList
+	data voidptr
+	next &GSList
 }
 struct C.GList {
-data voidptr
-next &GList
+	data voidptr
+	next &GList
 }
 
 /* REPOSITORY */
