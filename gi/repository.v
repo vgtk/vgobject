@@ -14,6 +14,8 @@ pub fn get_default_repository() &Repository {
 	return &Repository{repository}
 }
 
+// GOptionGroup *g_irepository_get_option_group (void)
+
 pub fn prepend_repository_search_path(path string) {
 	g_irepository_prepend_search_path(path.str)
 } 
@@ -58,6 +60,11 @@ pub fn (r &Repository) enumerate_versions(namespace string) []string {
 	return glist_gstring_to_array_string(versions)
 }
 
+// const char * g_irepository_load_typelib (GIRepository *repository,
+//                             				GITypelib *typelib,
+//                             				GIRepositoryLoadFlags flags,
+//                             				GError **error)
+
 pub fn (r &Repository) get_typelib_path(namespace string) string {
 	path := g_irepository_get_typelib_path(r.c, namespace.str)
 	return tos_and_free(path)
@@ -70,19 +77,27 @@ pub fn (r &Repository) is_registered(namespace, version string) bool {
 	return g_irepository_is_registered(r.c, namespace.str, version.str)
 }
 
-// TODO
-// pub fn (r &Repository) require(namespace, version string, flags int) (&Typelib, error) {
-	
-// }
+pub fn (r &Repository) require(namespace, version string, flags int) ?&Typelib {
+	err := &GError(0)
+	typelib := g_irepository_require(r.c, namespace.str, version.str, flags, &err)
+	if !isnil(error) {
+		return error(tos_and_free(err.message))
+	}
+	mut tlwrap := &Typelib(0)
+	if !isnil(typelib) {
+		tlwrap = &Typelib{typelib} 
+	}
+	return tlwrap
+}
 
 // TODO
 // pub fn (r &Repository) require_private(path, namespace, version string, flags int) (&Typelib, error) {
 	
 // }
 
-pub fn (r &Repository) find_by_name(namespace, name string) &BaseInfo {
-	base_info := g_irepository_find_by_name(r.c, namespace.str, name.str)
-	return &BaseInfo{base_info}
+pub fn (r &Repository) get_c_prefix(namespace string) string {
+	c_prefix := g_irepository_get_c_prefix(r.c, namespace.str)
+	return tos_and_free(c_prefix)
 }
 
 pub fn (r &Repository) get_shared_library(namespace string) string {
@@ -95,7 +110,24 @@ pub fn (r &Repository) get_version(namespace string) string {
 	return tos_and_free(version)
 }
 
-pub fn (r &Repository) get_c_prefix(namespace string) string {
-	c_prefix := g_irepository_get_c_prefix(r.c, namespace.str)
-	return tos_and_free(c_prefix)
+pub fn (r &Repository) find_by_gtype(gtype int) &BaseInfo {
+	base_info := g_irepository_find_by_gtype(r.c, gtype)
+	return &BaseInfo{base_info}
+}
+
+// GIEnumInfo * g_irepository_find_by_error_domain 	(GIRepository *repository,
+//                                     				GQuark domain)
+
+pub fn (r &Repository) find_by_name(namespace, name string) &BaseInfo {
+	base_info := g_irepository_find_by_name(r.c, namespace.str, name.str)
+	return &BaseInfo{base_info}
+}
+
+// void g_irepository_get_object_gtype_interfaces	(GIRepository *repository,
+//                                 					GType gtype,
+//                                 					guint *n_interfaces_out,
+//                                 					GIInterfaceInfo **interfaces_out)
+
+pub fn (r &Repository) dump(arg string) bool {
+	return g_irepository_dump(r.c, arg.str)
 }
