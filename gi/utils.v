@@ -24,19 +24,6 @@ fn glist_gstring_to_array_string(_list &C.GList) []string {
     return ret
 }
 
-// fn carray_string_to_array_string(arr &charptr) []string {
-//     mut arr_str := []string
-//     if isnil(arr) { return arr_str }
-//     mut iter := arr
-//     for !isnil(iter) {
-//         a := byte(iter)
-//         arr_str << tos_clone(a)
-//         iter = next_charptr(iter)
-//     }
-//     g_strfreev(arr)
-//     return arr_str
-// }
-
 fn carray_string_to_array_string(arr &charptr) []string {
     mut arr_str := []string
     if isnil(arr) { return arr_str }
