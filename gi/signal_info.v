@@ -31,7 +31,3 @@ fn (si &SignalInfo) get_class_closure() &VFuncInfo {
 fn (si &SignalInfo) true_stops_emit() bool {
 	return g_signal_info_true_stops_emit(si.cai.c)
 }
-
-
-
-// 
