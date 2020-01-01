@@ -152,6 +152,11 @@ fn C.g_type_info_get_array_fixed_size(&GITypeInfo) int
 fn C.g_type_info_is_zero_terminated(&GITypeInfo) bool
 fn C.g_type_info_get_array_type(&GITypeInfo) int /* GIArrayType */
 
+/* CONSTANT INFO */
+fn C.g_constant_info_free_value(&GIConstantInfo, &GIArgument)
+fn C.g_constant_info_get_type(&GIConstantInfo) &GITypeInfo
+fn C.g_constant_info_get_value(&GIConstantInfo, &GIArgument) int
+
 /* SIGNAL INFO */
 fn C.g_signal_info_get_flags(&GISignalInfo) int /* GSignalFlags */
 fn C.g_signal_info_get_class_closure(&GISignalInfo) &GIVFuncInfo
