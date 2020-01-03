@@ -22,7 +22,7 @@ fn (si &SignalInfo) get_flags() int {
 
 fn (si &SignalInfo) get_class_closure() &VFuncInfo {
 	clls := g_signal_info_get_class_closure(si.cai.c)
-	if isnil(clls) { return 0 }
+	if clls == 0 { return 0 }
 	cptr := &GIBaseInfo(clls)
 	ptr := &BaseInfo{cptr}
 	return &VFuncInfo(ptr)
