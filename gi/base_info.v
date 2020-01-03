@@ -1,6 +1,6 @@
 module gi
 
-struct BaseInfo {
+pub struct BaseInfo {
 	c &GIBaseInfo
 }
 
@@ -57,12 +57,12 @@ pub fn (bi &BaseInfo) get_typelib() &Typelib {
 pub fn (bi &BaseInfo) get_namespace() string {
 	namespace := g_base_info_get_namespace(bi.c)
 	if isnil(namespace) { return '' }
-	return tos_and_free(namespace)
+	return tos3(namespace)
 }
 
 pub fn (bi &BaseInfo) get_name() string {
 	name := g_base_info_get_name(bi.c)
-	return tos_and_free(name)
+	return tos3(name)
 }
 
 pub fn (bi &BaseInfo) get_attribute(name string) string {
@@ -84,7 +84,7 @@ pub fn (bi &BaseInfo) get_container() &BaseInfo {
 	return &BaseInfo{container}
 }
 
-pub fn (bi &BaseInfo) g_base_info_is_deprecated() bool {
+pub fn (bi &BaseInfo) is_deprecated() bool {
 	return g_base_info_is_deprecated(bi.c)
 }
 
