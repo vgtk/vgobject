@@ -4,3 +4,4 @@ fns.txt
 v
 binding_generator
 *.o
+makefile
