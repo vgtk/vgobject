@@ -74,7 +74,6 @@ fn C.g_irepository_find_by_error_domain(&GIRepository, u32 /* GQuark */) &GIEnum
 fn C.g_irepository_find_by_name(&GIRepository, charptr, charptr) &GIBaseInfo
 fn C.g_irepository_get_object_gtype_interfaces(&GIRepository, GType, &u32, voidptr)
 fn C.g_irepository_dump(charptr, &GError) bool
-// fn C.GClosure(*closure, *return_gvalue, n_param_values, *param_values, invocation_hint)
 
 /* BASE INFO */
 fn C.g_info_new(int /* GIInfoType */, &GIBaseInfo, &GITypelib, u32) &GIBaseInfo 
@@ -123,6 +122,7 @@ fn C.g_arg_info_is_return_value(&GIArgInfo) bool
 fn C.g_arg_info_is_skip(&GIArgInfo) bool
 
 /* FUNCTION INFO */
+fn C.GI_IS_FUNCTION_INFO(voidptr) bool
 fn C.g_function_info_get_flags(&GIFunctionInfo) int /* GIFunctionInfoFlags */
 fn C.g_function_info_get_property(&GIFunctionInfo) &GIPropertyInfo
 fn C.g_function_info_get_symbol(&GIFunctionInfo) charptr
@@ -163,10 +163,118 @@ fn C.g_signal_info_get_class_closure(&GISignalInfo) &GIVFuncInfo
 fn C.g_signal_info_true_stops_emit(&GISignalInfo) bool
 
 /* ENUM INFO */
+fn C.GI_IS_VALUE_INFO(voidptr) bool
+fn C.GI_IS_ENUM_INFO(voidptr) bool
+fn C.g_enum_info_get_n_values(&GIEnumInfo) int
+fn C.g_enum_info_get_value(&GIEnumInfo, int) &GIValueInfo
+fn C.g_enum_info_get_n_methods(&GIEnumInfo) int
+fn C.g_enum_info_get_method(&GIEnumInfo, int) &GIFunctionInfo
+fn C.g_enum_info_get_storage_type(&GIEnumInfo) int /* GITypeTag */
+fn C.g_enum_info_get_error_domain(&GIEnumInfo) charptr
+fn C.g_value_info_get_value(&GIValueInfo) i64
 
+/* OBJECT INFO */
+fn C.g_object_info_get_abstract(&GIObjectInfo) bool
+fn C.g_object_info_get_fundamental(&GIObjectInfo) bool
+fn C.g_object_info_get_parent(&GIObjectInfo) &GIObjectInfo
+fn C.g_object_info_get_type_name(&GIObjectInfo) charptr
+fn C.g_object_info_get_type_init(&GIObjectInfo) charptr
+fn C.g_object_info_get_n_constants(&GIObjectInfo) int
+fn C.g_object_info_get_constant(&GIObjectInfo, int) &GIConstantInfo
+fn C.g_object_info_get_n_fields(&GIObjectInfo) int
+fn C.g_object_info_get_field(&GIObjectInfo, int) &GIFieldInfo
+fn C.g_object_info_get_n_interfaces(&GIObjectInfo) int
+fn C.g_object_info_get_interface(&GIObjectInfo, int) &GIInterfaceInfo
+fn C.g_object_info_get_n_methods(&GIObjectInfo) int
+fn C.g_object_info_get_method(&GIObjectInfo, int) &GIFunctionInfo
+fn C.g_object_info_find_method(&GIObjectInfo, &charptr) &GIFunctionInfo
+fn C.g_object_info_find_method_using_interfaces(&GIObjectInfo, &charptr, &GIObjectInfo) &GIFunctionInfo
+fn C.g_object_info_get_n_properties(&GIObjectInfo) int
+fn C.g_object_info_get_property(&GIObjectInfo, int) &GIPropertyInfo
+fn C.g_object_info_get_n_signals(&GIObjectInfo) int
+fn C.g_object_info_get_signal(&GIObjectInfo, int) &GISignalInfo
+fn C.g_object_info_find_signal(&GIObjectInfo, &charptr) &GISignalInfo
+fn C.g_object_info_get_n_vfuncs(&GIObjectInfo) int
+fn C.g_object_info_get_vfunc(&GIObjectInfo, int) &GIVFuncInfo
+fn C.g_object_info_find_vfunc(&GIObjectInfo, &charptr) &GIVFuncInfo
+fn C.g_object_info_find_vfunc_using_interfaces(&GIObjectInfo, &charptr, &GIObjectInfo) &GIVFuncInfo
+fn C.g_object_info_get_class_struct(&GIObjectInfo) &GIStructInfo
+fn C.g_object_info_get_ref_function(&GIObjectInfo) charptr
+// fn C.g_object_info_get_ref_function_pointer(&GIObjectInfo) voidptr/* GIObjectInfoRefFunction */
+fn C.g_object_info_get_unref_function(&GIObjectInfo) charptr
+// fn C.g_object_info_get_unref_function_pointer(&GIObjectInfo) GIObjectInfoUnrefFunction
+fn C.g_object_info_get_set_value_function(&GIObjectInfo)
+// fn C.g_object_info_get_set_value_function_pointer(&GIObjectInfo) GIObjectInfoSetValueFunction
+fn C.g_object_info_get_get_value_function(&GIObjectInfo)
+// fn C.g_object_info_get_get_value_function_pointer(&GIObjectInfo) GIObjectInfoGetValueFunction
+
+/* FIELD INFO */
+fn C.g_field_info_get_field(&GIFieldInfo, voidptr, &GIArgument) bool
+fn C.g_field_info_set_field(&GIFieldInfo, voidptr, &GIArgument) bool
+fn C.g_field_info_get_flags(&GIFieldInfo) int /* GIFieldInfoFlags */
+fn C.g_field_info_get_offset(&GIFieldInfo) int
+fn C.g_field_info_get_size(&GIFieldInfo) int
+fn C.g_field_info_get_type(&GIFieldInfo) &GITypeInfo
+
+/* STRUCT INFO */
+fn C.g_struct_info_find_field(&GIStructInfo, &charptr) &GIFieldInfo
+fn C.g_struct_info_get_alignment(&GIStructInfo) u32
+fn C.g_struct_info_get_size(&GIStructInfo) u32
+fn C.g_struct_info_is_gtype_struct(&GIStructInfo) bool
+fn C.g_struct_info_is_foreign(&GIStructInfo) bool
+fn C.g_struct_info_get_n_fields(&GIStructInfo) int
+fn C.g_struct_info_get_field(&GIStructInfo, int) &GIFieldInfo
+fn C.g_struct_info_get_n_methods(&GIStructInfo) int
+fn C.g_struct_info_get_method(&GIStructInfo, int) &GIFunctionInfo
+fn C.g_struct_info_find_method(&GIStructInfo, &charptr) &GIFunctionInfo
+
+/* REGISTERED TYPE INFO */
+fn C.g_registered_type_info_get_type_name(&GIRegisteredTypeInfo) charptr
+fn C.g_registered_type_info_get_type_init(&GIRegisteredTypeInfo) charptr
+fn C.g_registered_type_info_get_g_type(&GIRegisteredTypeInfo) GType
 
 /* INTERFACE INFO */
+fn C.g_interface_info_get_n_prerequisites(&GIInterfaceInfo) int
+fn C.g_interface_info_get_prerequisite(&GIInterfaceInfo, int) &GIBaseInfo
+fn C.g_interface_info_get_n_properties(&GIInterfaceInfo) int
+fn C.g_interface_info_get_property(&GIInterfaceInfo, int) &GIPropertyInfo
+fn C.g_interface_info_get_n_methods(&GIInterfaceInfo) int
+fn C.g_interface_info_get_method(&GIInterfaceInfo, int) &GIFunctionInfo
+fn C.g_interface_info_find_method(&GIInterfaceInfo, &charptr) &GIFunctionInfo
+fn C.g_interface_info_get_n_signals(&GIInterfaceInfo) int
+fn C.g_interface_info_get_signal(&GIInterfaceInfo, int) &GISignalInfo
+fn C.g_interface_info_find_signal(&GIInterfaceInfo, &charptr) &GISignalInfo
+fn C.g_interface_info_get_n_vfuncs(&GIInterfaceInfo) int
+fn C.g_interface_info_get_vfunc(&GIInterfaceInfo, int) &GIVFuncInfo
+fn C.g_interface_info_find_vfunc(&GIInterfaceInfo, &charptr) &GIVFuncInfo
+fn C.g_interface_info_get_n_constants(&GIInterfaceInfo) int
+fn C.g_interface_info_get_constant(&GIInterfaceInfo, int) &GIConstantInfo
+fn C.g_interface_info_get_iface_struct(&GIInterfaceInfo) &GIStructInfo
 
+/* UNION INFO */
+fn C.g_union_info_get_n_fields(&GIUnionInfo) int
+fn C.g_union_info_get_field(&GIUnionInfo, int) &GIFieldInfo
+fn C.g_union_info_get_n_methods(&GIUnionInfo) int
+fn C.g_union_info_get_method(&GIUnionInfo, int) &GIFunctionInfo
+fn C.g_union_info_is_discriminated(&GIUnionInfo) bool
+fn C.g_union_info_get_discriminator_offset(&GIUnionInfo) int
+fn C.g_union_info_get_discriminator_type(&GIUnionInfo) &GITypeInfo
+fn C.g_union_info_get_discriminator(&GIUnionInfo, int) &GIConstantInfo
+fn C.g_union_info_find_method(&GIUnionInfo, &charptr) &GIFunctionInfo
+fn C.g_union_info_get_size(&GIUnionInfo) u32
+fn C.g_union_info_get_alignment(&GIUnionInfo) u32
+
+// GTYPE
+fn C.G_TYPE_IS_ABSTRACT(GType) bool
+fn C.G_TYPE_IS_DERIVED(GType) bool
+fn C.G_TYPE_IS_FUNDAMENTAL(GType) bool
+fn C.G_TYPE_IS_VALUE_TYPE(GType) bool
+fn C.G_TYPE_HAS_VALUE_TABLE(GType) bool
+fn C.G_TYPE_IS_CLASSED(GType) bool
+fn C.G_TYPE_IS_INSTANTIATABLE(GType) bool
+fn C.G_TYPE_IS_DERIVABLE(GType) bool
+fn C.G_TYPE_IS_DEEP_DERIVABLE(GType) bool
+fn C.G_TYPE_IS_INTERFACE(GType) bool
 
 // UTILS
 fn C.g_slist_length(&GSList) int
