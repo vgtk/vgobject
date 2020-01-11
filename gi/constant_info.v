@@ -1,9 +1,11 @@
 module gi
 
-type u8 C.uint8_t
-type i32 C.int32_t
+type u8		C.uint8_t
+type i32	C.int32_t
 
-type gi__ConstantInfo BaseInfo
+pub struct ConstantInfo {
+	c &GIConstantInfo
+}
 
 fn (ci &ConstantInfo) get_type() &TypeInfo {
 	cptr := &GIBaseInfo(g_constant_info_get_type(ci.c))
@@ -15,7 +17,7 @@ fn (ci &ConstantInfo) get_value() voidptr {
 	arg := GIArgument(0)
 	g_constant_info_get_value(ci.c, &arg)
 
-	ti := &TypeInfo(ci.get_type())
+	ti := ci.get_type()
 	tag := ti.get_tag()
 	match tag {
 		TYPE_TAG_BOOLEAN	{ return &bool(&arg) }
@@ -34,7 +36,7 @@ fn (ci &ConstantInfo) get_value() voidptr {
 		}
 		else {
 			eprintln('unsupported constant value')
-			return 0 
+			return voidptr(0) 
 		}
 	}
 

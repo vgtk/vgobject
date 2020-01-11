@@ -1,34 +1,36 @@
 module gi
 
-type gi__CallableInfo BaseInfo
+pub struct CallableInfo {
+	c &GICallableInfo
+}
 
-fn (ci &CallableInfo) can_throw_gerror() bool {
+pub fn (ci &CallableInfo) can_throw_gerror() bool {
 	return g_callable_info_can_throw_gerror(ci.c)
 }
 
-fn (ci &CallableInfo) get_n_args() int {
+pub fn (ci &CallableInfo) get_n_args() int {
 	return g_callable_info_get_n_args(ci.c)
 }
 
-fn (ci &CallableInfo) get_arg(n int) &ArgInfo {
+pub fn (ci &CallableInfo) get_arg(n int) &ArgInfo {
 	cptr := &GIBaseInfo(g_callable_info_get_arg(ci.c, n))
 	ptr := &BaseInfo{cptr}
 	return &ArgInfo(ptr)
 }
 
-fn (ci &CallableInfo) get_caller_owns() int /* GITransfer */ {
+pub fn (ci &CallableInfo) get_caller_owns() int /* GITransfer */ {
 	return g_callable_info_get_caller_owns(ci.c)
 }
 
-fn (ci &CallableInfo) get_instance_ownership_transfer() int /* GITransfer */ {
+pub fn (ci &CallableInfo) get_instance_ownership_transfer() int /* GITransfer */ {
 	return g_callable_info_get_instance_ownership_transfer(ci.c)
 }
 
-fn (ci &CallableInfo) get_return_attribute(name string) string {
+pub fn (ci &CallableInfo) get_return_attribute(name string) string {
 	return tos_and_free(g_callable_info_get_return_attribute(ci.c, name.str))
 }
 
-fn (ci &CallableInfo) get_return_type() &TypeInfo {
+pub fn (ci &CallableInfo) get_return_type() &TypeInfo {
 	cptr := &GIBaseInfo(g_callable_info_get_return_type(ci.c))
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
@@ -45,11 +47,11 @@ fn (ci &CallableInfo) get_return_type() &TypeInfo {
 //                         			gboolean throws,
 //                         			GError **error)
 
-fn (ci &CallableInfo) is_method() bool {
+pub fn (ci &CallableInfo) is_method() bool {
 	return g_callable_info_is_method(ci.c)
 }
 
-fn (ci &CallableInfo) iterate_return_attributes(cb fn(name, value string)) {
+pub fn (ci &CallableInfo) iterate_return_attributes(cb fn(name, value string)) {
 	iter := &GIAttributeIter(0)
 	_name := ''
 	_value := ''
@@ -58,18 +60,22 @@ fn (ci &CallableInfo) iterate_return_attributes(cb fn(name, value string)) {
 	}
 }
 
-fn (ci &CallableInfo) load_arg(n int, arg &ArgInfo) {
+pub fn (ci &CallableInfo) load_arg(n int, arg &ArgInfo) {
 	g_callable_info_load_arg(ci.c, n, arg.c)
 }
 
-fn (ci &CallableInfo) load_return_type(type_info &TypeInfo) {
+pub fn (ci &CallableInfo) load_return_type(type_info &TypeInfo) {
 	g_callable_info_load_return_type(ci.c, type_info.c)
 }
 
-fn (ci &CallableInfo) skip_return() bool {
+pub fn (ci &CallableInfo) may_return_nil() bool {
+	return g_callable_info_may_return_null(ci.c)
+}
+
+pub fn (ci &CallableInfo) skip_return() bool {
 	return g_callable_info_skip_return(ci.c)
 }
 
-fn (ci &CallableInfo) may_return_nil() bool {
-	return g_callable_info_may_return_null(ci.c)
+pub fn (ci &CallableInfo) is_valid() bool {
+	return GI_IS_CALLABLE_INFO(ci.c)
 }

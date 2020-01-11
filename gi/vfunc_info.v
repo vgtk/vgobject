@@ -1,9 +1,7 @@
 module gi
 
-// type gi__VFuncInfo CallableInfo
-
 struct VFuncInfo {
-	cai &CallableInfo
+	c &GIVFuncInfo
 }
 
 const (
@@ -13,22 +11,22 @@ const (
 )
 
 fn (vfi &VFuncInfo) get_flags() int {
-	return g_vfunc_info_get_flags(vfi.cai.c)
+	return g_vfunc_info_get_flags(vfi.c)
 }
 
 fn (vfi &VFuncInfo) get_offset() int {
-	return g_vfunc_info_get_offset(vfi.cai.c)
+	return g_vfunc_info_get_offset(vfi.c)
 }
 
 fn (vfi &VFuncInfo) get_signal() &SignalInfo {
-	cptr := &GIBaseInfo(g_vfunc_info_get_signal(vfi.cai.c))
+	cptr := &GIBaseInfo(g_vfunc_info_get_signal(vfi.c))
 	if isnil(cptr) { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &SignalInfo(ptr)
 }
 
 fn (vfi &VFuncInfo) get_invoker() &FunctionInfo {
-	cptr := &GIBaseInfo(g_vfunc_info_get_invoker(vfi.cai.c))
+	cptr := &GIBaseInfo(g_vfunc_info_get_invoker(vfi.c))
 	if isnil(cptr) { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &FunctionInfo(ptr)

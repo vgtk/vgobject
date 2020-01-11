@@ -1,6 +1,8 @@
 module gi
 
-type gi__PropertyInfo BaseInfo
+pub struct PropertyInfo {
+	c &GIPropertyInfo
+}
 
 const (
 	PARAM_READABLE 			= C.G_PARAM_READABLE
@@ -16,22 +18,20 @@ const (
 	PARAM_DEPRECATED 		= C.G_PARAM_DEPRECATED
 )
 
-fn (pi &PropertyInfo) get_flags() int /* GParamFlags */ {
+pub fn (pi &PropertyInfo) get_flags() int /* GParamFlags */ {
 	return g_property_info_get_flags(pi.c)
 }
 
-fn (pi &PropertyInfo) get_ownership_transfer() int /* GITransfer */ {
+pub fn (pi &PropertyInfo) get_ownership_transfer() int /* GITransfer */ {
 	return g_property_info_get_ownership_transfer(pi.c)
 }
 
-fn (pi &PropertyInfo) get_type() &TypeInfo {
+pub fn (pi &PropertyInfo) get_type() &TypeInfo {
 	cptr := &GIBaseInfo(g_property_info_get_type(pi.c))
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
 }
 
-
-
-
-
-// 
+pub fn (pi &PropertyInfo) unref() {
+	g_base_info_unref(pi.c)
+}

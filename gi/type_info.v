@@ -1,6 +1,8 @@
 module gi
 
-type gi__TypeInfo BaseInfo
+pub struct TypeInfo {
+	c &GITypeInfo
+}
 
 const (
 	ARRAY_TYPE_C          = C.GI_ARRAY_TYPE_C
@@ -34,37 +36,37 @@ const (
 	TYPE_TAG_UNICHAR   = C.GI_TYPE_TAG_UNICHAR
 )
 
-fn (ti &TypeInfo) is_pointer() bool {
+pub fn (ti &TypeInfo) is_pointer() bool {
 	return g_type_info_is_pointer(ti.c)
 }
 
-fn (ti &TypeInfo) get_tag() int /* GITypeTag */{
+pub fn (ti &TypeInfo) get_tag() int /* GITypeTag */{
 	return g_type_info_get_tag(ti.c)
 }
 
-fn (ti &TypeInfo) get_param_type(n int) &TypeInfo {
+pub fn (ti &TypeInfo) get_param_type(n int) &TypeInfo {
 	cptr := &GIBaseInfo(g_type_info_get_param_type(ti.c, n))
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
 }
 
-fn (ti &TypeInfo) get_interface() &BaseInfo {
+pub fn (ti &TypeInfo) get_interface() &BaseInfo {
 	cptr := g_type_info_get_interface(ti.c)
 	return &BaseInfo{cptr}
 }
 
-fn (ti &TypeInfo) get_array_length() int {
+pub fn (ti &TypeInfo) get_array_length() int {
 	return g_type_info_get_array_length(ti.c)
 }
 
-fn (ti &TypeInfo) get_array_fixed_size() int {
+pub fn (ti &TypeInfo) get_array_fixed_size() int {
 	return g_type_info_get_array_fixed_size(ti.c)
 }
 
-fn (ti &TypeInfo) is_zero_terminated() bool {
+pub fn (ti &TypeInfo) is_zero_terminated() bool {
 	return g_type_info_is_zero_terminated(ti.c)
 }
 
-fn (ti &TypeInfo) get_array_type() int /* GIArrayType */ {
+pub fn (ti &TypeInfo) get_array_type() int /* GIArrayType */ {
 	return g_type_info_get_array_type(ti.c)
 }

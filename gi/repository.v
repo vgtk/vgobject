@@ -77,17 +77,17 @@ pub fn (r &Repository) is_registered(namespace, version string) bool {
 	return g_irepository_is_registered(r.c, namespace.str, version.str)
 }
 
-pub fn (r &Repository) require(namespace, version string, flags int) ?&Typelib {
+pub fn (r &Repository) require(namespace, version string/* , flags int */) ?&Typelib {
 	err := &GError(0)
-	typelib := g_irepository_require(r.c, namespace.str, version.str, flags, &err)
-	if !isnil(error) {
+	typelib := if version != '' {
+		g_irepository_require(r.c, namespace.str, version.str, 1, &err)
+	} else {
+		g_irepository_require(r.c, namespace.str, 0, 1, &err)
+	}
+	if err != 0 {
 		return error(tos_and_free(err.message))
 	}
-	mut tlwrap := &Typelib(0)
-	if !isnil(typelib) {
-		tlwrap = &Typelib{typelib} 
-	}
-	return tlwrap
+	return &Typelib{typelib}
 }
 
 // TODO

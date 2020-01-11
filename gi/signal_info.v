@@ -12,22 +12,22 @@ const (
 	SIGNAL_DEPRECATED	= C.G_SIGNAL_DEPRECATED
 )
 
-struct SignalInfo {
-	cai &CallableInfo
+pub struct SignalInfo {
+	c &GISignalInfo
 }
 
-fn (si &SignalInfo) get_flags() int {
-	return g_signal_info_get_flags(si.cai.c)
+pub fn (si &SignalInfo) get_flags() int {
+	return g_signal_info_get_flags(si.c)
 }
 
-fn (si &SignalInfo) get_class_closure() &VFuncInfo {
-	clls := g_signal_info_get_class_closure(si.cai.c)
+pub fn (si &SignalInfo) get_class_closure() &VFuncInfo {
+	clls := g_signal_info_get_class_closure(si.c)
 	if clls == 0 { return 0 }
 	cptr := &GIBaseInfo(clls)
 	ptr := &BaseInfo{cptr}
 	return &VFuncInfo(ptr)
 }
 
-fn (si &SignalInfo) true_stops_emit() bool {
-	return g_signal_info_true_stops_emit(si.cai.c)
+pub fn (si &SignalInfo) true_stops_emit() bool {
+	return g_signal_info_true_stops_emit(si.c)
 }

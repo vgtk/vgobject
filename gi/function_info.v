@@ -1,10 +1,10 @@
 module gi
 
-struct FunctionInfo {
-	cai &CallableInfo
+pub struct FunctionInfo {
+	c &FunctionInfo
 }
 
-const (
+pub const (
 	FUNCTION_IS_METHOD      = C.GI_FUNCTION_IS_METHOD
 	FUNCTION_IS_CONSTRUCTOR = C.GI_FUNCTION_IS_CONSTRUCTOR
 	FUNCTION_IS_GETTER      = C.GI_FUNCTION_IS_GETTER
@@ -13,25 +13,25 @@ const (
 	FUNCTION_THROWS         = C.GI_FUNCTION_THROWS
 )
 
-fn (fi &FunctionInfo) get_flags() int /* GIFunctionInfoFlags */ {
-	return g_function_info_get_flags(fi.cai.c)
+pub fn (fi &FunctionInfo) get_flags() int /* GIFunctionInfoFlags */ {
+	return g_function_info_get_flags(fi.c)
 }
 
-fn (fi &FunctionInfo) get_property() &PropertyInfo {
-	cptr := &GIBaseInfo(g_function_info_get_property(fi.cai.c))
-	if isnil(cptr) { return 0 }
+pub fn (fi &FunctionInfo) get_property() &PropertyInfo {
+	cptr := &GIBaseInfo(g_function_info_get_property(fi.c))
+	if cptr == 0 { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &PropertyInfo(ptr)
 }
 
-fn (fi &FunctionInfo) get_symbol() string {
-	symbol := g_function_info_get_symbol(fi.cai.c)
+pub fn (fi &FunctionInfo) get_symbol() string {
+	symbol := g_function_info_get_symbol(fi.c)
 	return tos_and_free(symbol)
 }
 
-fn (fi &FunctionInfo) get_vfunc() &VFuncInfo {
-	cptr := &GIBaseInfo(g_function_info_get_vfunc(fi.cai.c))
-	if isnil(cptr) { return 0 }
+pub fn (fi &FunctionInfo) get_vfunc() &VFuncInfo {
+	cptr := &GIBaseInfo(g_function_info_get_vfunc(fi.c))
+	if cptr == 0 { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &VFuncInfo(ptr)
 }
@@ -44,6 +44,6 @@ fn (fi &FunctionInfo) get_vfunc() &VFuncInfo {
 //									GIArgument *return_value,
 //									GError **error)
 
-
-
-// 
+pub fn (fi &FunctionInfo) is_valid() bool {
+	return GI_IS_FUNCTION_INFO(fi.c)
+}

@@ -1,13 +1,13 @@
 module gi
 
-struct Typelib {
+pub struct Typelib {
 	c &GITypelib
 }
 
 pub fn new_typelib_from_memory(mem byteptr, size u32) ?&Typelib {
 	error := &GError(0)
 	typelib := g_typelib_new_from_memory(&mem, size, &error)
-	if isnil(typelib) {
+	if typelib == 0 {
 		panic(tos3(error.message))
 	}
 	return &Typelib{typelib}
