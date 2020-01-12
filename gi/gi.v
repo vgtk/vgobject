@@ -1,5 +1,9 @@
 module gi
 
+#flag linux `pkg-config --cflags gobject-introspection-1.0` `pkg-config --libs gobject-introspection-1.0`
+
+#include <girepository.h>
+
 pub interface BaseInfoLiker {
 	inherit_from_base_info() &BaseInfo
 	get_cptr() &GIBaseInfo
