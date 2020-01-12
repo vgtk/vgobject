@@ -1,6 +1,6 @@
 module gi
 
-struct VFuncInfo {
+pub struct VFuncInfo {
 	c &GIVFuncInfo
 }
 
@@ -10,22 +10,22 @@ const (
 	VFUNC_MUST_NOT_OVERRIDE	= C.GI_VFUNC_MUST_NOT_OVERRIDE
 )
 
-fn (vfi &VFuncInfo) get_flags() int {
+pub fn (vfi &VFuncInfo) get_flags() int {
 	return g_vfunc_info_get_flags(vfi.c)
 }
 
-fn (vfi &VFuncInfo) get_offset() int {
+pub fn (vfi &VFuncInfo) get_offset() int {
 	return g_vfunc_info_get_offset(vfi.c)
 }
 
-fn (vfi &VFuncInfo) get_signal() &SignalInfo {
+pub fn (vfi &VFuncInfo) get_signal() &SignalInfo {
 	cptr := &GIBaseInfo(g_vfunc_info_get_signal(vfi.c))
 	if isnil(cptr) { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &SignalInfo(ptr)
 }
 
-fn (vfi &VFuncInfo) get_invoker() &FunctionInfo {
+pub fn (vfi &VFuncInfo) get_invoker() &FunctionInfo {
 	cptr := &GIBaseInfo(g_vfunc_info_get_invoker(vfi.c))
 	if isnil(cptr) { return 0 }
 	ptr := &BaseInfo{cptr}
