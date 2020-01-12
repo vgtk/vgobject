@@ -4,23 +4,27 @@ pub struct ArgInfo {
 	c &GIArgInfo
 }
 
+pub type Direction	int
+pub type ScopeType	int
+pub type Transfer	int
+
 pub const (
-	GI_DIRECTION_IN		= C.GI_DIRECTION_IN
-	GI_DIRECTION_OUT	= C.GI_DIRECTION_OUT
-	GI_DIRECTION_INOUT	= C.GI_DIRECTION_INOUT
+	GI_DIRECTION_IN		= Direction(C.GI_DIRECTION_IN)
+	GI_DIRECTION_OUT	= Direction(C.GI_DIRECTION_OUT)
+	GI_DIRECTION_INOUT	= Direction(C.GI_DIRECTION_INOUT)
 )
 
 pub const (
-	SCOPE_TYPE_INVALID	= C.GI_SCOPE_TYPE_INVALID
-	SCOPE_TYPE_CALL		= C.GI_SCOPE_TYPE_CALL
-	SCOPE_TYPE_ASYNC	= C.GI_SCOPE_TYPE_ASYNC
-	SCOPE_TYPE_NOTIFIED	= C.GI_SCOPE_TYPE_NOTIFIED
+	SCOPE_TYPE_INVALID	= ScopeType(C.GI_SCOPE_TYPE_INVALID)
+	SCOPE_TYPE_CALL		= ScopeType(C.GI_SCOPE_TYPE_CALL)
+	SCOPE_TYPE_ASYNC	= ScopeType(C.GI_SCOPE_TYPE_ASYNC)
+	SCOPE_TYPE_NOTIFIED	= ScopeType(C.GI_SCOPE_TYPE_NOTIFIED)
 )
 
 pub const (
-	TRANSFER_NOTHING	= C.GI_TRANSFER_NOTHING
-	TRANSFER_CONTAINER	= C.GI_TRANSFER_CONTAINER
-	TRANSFER_EVERYTHING	= C.GI_TRANSFER_EVERYTHING
+	TRANSFER_NOTHING	= Transfer(C.GI_TRANSFER_NOTHING)
+	TRANSFER_CONTAINER	= Transfer(C.GI_TRANSFER_CONTAINER)
+	TRANSFER_EVERYTHING	= Transfer(C.GI_TRANSFER_EVERYTHING)
 )
 
 pub fn (ai &ArgInfo) get_closure() int {
@@ -31,15 +35,15 @@ pub fn (ai &ArgInfo) get_destroy() int {
 	return g_arg_info_get_destroy(ai.c)
 }
 
-pub fn (ai &ArgInfo) get_direction() int /* Direction */ {
+pub fn (ai &ArgInfo) get_direction() Direction {
 	return g_arg_info_get_direction(ai.c)
 }
 
-pub fn (ai &ArgInfo) get_ownership_transfer() int /* GITransfer */ {
+pub fn (ai &ArgInfo) get_ownership_transfer() Transfer {
 	return g_arg_info_get_ownership_transfer(ai.c)
 }
 
-pub fn (ai &ArgInfo) get_scope() int /* GIScopeType */ {
+pub fn (ai &ArgInfo) get_scope() ScopeType {
 	return g_arg_info_get_scope(ai.c)
 }
 

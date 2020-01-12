@@ -18,11 +18,11 @@ pub fn (ci &CallableInfo) get_arg(n int) &ArgInfo {
 	return &ArgInfo(ptr)
 }
 
-pub fn (ci &CallableInfo) get_caller_owns() int /* GITransfer */ {
+pub fn (ci &CallableInfo) get_caller_owns() Transfer {
 	return g_callable_info_get_caller_owns(ci.c)
 }
 
-pub fn (ci &CallableInfo) get_instance_ownership_transfer() int /* GITransfer */ {
+pub fn (ci &CallableInfo) get_instance_ownership_transfer() Transfer {
 	return g_callable_info_get_instance_ownership_transfer(ci.c)
 }
 

@@ -4,9 +4,11 @@ pub struct FieldInfo {
 	c &GIFieldInfo
 }
 
+pub type FieldInfoFlags int
+
 pub const (
-	FIELD_IS_READABLE = C.GI_FIELD_IS_READABLE
-	FIELD_IS_WRITABLE = C.GI_FIELD_IS_WRITABLE
+	FIELD_IS_READABLE = FieldInfoFlags(C.GI_FIELD_IS_READABLE)
+	FIELD_IS_WRITABLE = FieldInfoFlags(C.GI_FIELD_IS_WRITABLE)
 )
 
 pub fn (fi &FieldInfo) get_field(mem voidptr, arg &GIArgument) bool {
@@ -17,7 +19,7 @@ pub fn (fi &FieldInfo) set_field(mem voidptr, arg &GIArgument) bool {
 	return g_field_info_set_field(fi.c, mem, arg)
 }
 
-pub fn (fi &FieldInfo) get_flags() int /* GIFieldInfoFlags */ {
+pub fn (fi &FieldInfo) get_flags() FieldInfoFlags {
 	return g_field_info_get_flags(fi.c)
 }
 

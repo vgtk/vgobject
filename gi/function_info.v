@@ -4,16 +4,18 @@ pub struct FunctionInfo {
 	c &FunctionInfo
 }
 
+pub type FunctionInfoFlags int
+
 pub const (
-	FUNCTION_IS_METHOD      = C.GI_FUNCTION_IS_METHOD
-	FUNCTION_IS_CONSTRUCTOR = C.GI_FUNCTION_IS_CONSTRUCTOR
-	FUNCTION_IS_GETTER      = C.GI_FUNCTION_IS_GETTER
-	FUNCTION_IS_SETTER      = C.GI_FUNCTION_IS_SETTER
-	FUNCTION_WRAPS_VFUNC    = C.GI_FUNCTION_WRAPS_VFUNC
-	FUNCTION_THROWS         = C.GI_FUNCTION_THROWS
+	FUNCTION_IS_METHOD      = FunctionInfoFlags(C.GI_FUNCTION_IS_METHOD)
+	FUNCTION_IS_CONSTRUCTOR = FunctionInfoFlags(C.GI_FUNCTION_IS_CONSTRUCTOR)
+	FUNCTION_IS_GETTER      = FunctionInfoFlags(C.GI_FUNCTION_IS_GETTER)
+	FUNCTION_IS_SETTER      = FunctionInfoFlags(C.GI_FUNCTION_IS_SETTER)
+	FUNCTION_WRAPS_VFUNC    = FunctionInfoFlags(C.GI_FUNCTION_WRAPS_VFUNC)
+	FUNCTION_THROWS         = FunctionInfoFlags(C.GI_FUNCTION_THROWS)
 )
 
-pub fn (fi &FunctionInfo) get_flags() int /* GIFunctionInfoFlags */ {
+pub fn (fi &FunctionInfo) get_flags() FunctionInfoFlags {
 	return g_function_info_get_flags(fi.c)
 }
 
