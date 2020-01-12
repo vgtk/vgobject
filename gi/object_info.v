@@ -20,7 +20,9 @@ pub fn (oi &ObjectInfo) get_parent() &ObjectInfo {
 }
 
 pub fn (oi &ObjectInfo) get_type_name() string {
-	return tos3(g_object_info_get_type_name(oi.c))
+	type_name := g_object_info_get_type_name(oi.c)
+	if type_name == 0 { return '' }
+	return tos3(type_name)
 }
 
 pub fn (oi &ObjectInfo) get_type_init() string {
