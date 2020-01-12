@@ -7,13 +7,13 @@ pub struct ConstantInfo {
 	c &GIConstantInfo
 }
 
-fn (ci &ConstantInfo) get_type() &TypeInfo {
+pub fn (ci &ConstantInfo) get_type() &TypeInfo {
 	cptr := &GIBaseInfo(g_constant_info_get_type(ci.c))
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
 }
 
-fn (ci &ConstantInfo) get_value() voidptr {
+pub fn (ci &ConstantInfo) get_value() voidptr {
 	arg := GIArgument(0)
 	g_constant_info_get_value(ci.c, &arg)
 
