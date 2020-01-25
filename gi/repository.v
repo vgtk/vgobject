@@ -60,10 +60,14 @@ pub fn (r &Repository) enumerate_versions(namespace string) []string {
 	return glist_gstring_to_array_string(versions)
 }
 
-// const char * g_irepository_load_typelib (GIRepository *repository,
-//                             				GITypelib *typelib,
-//                             				GIRepositoryLoadFlags flags,
-//                             				GError **error)
+pub fn (r &Repository) load_typelib(typelib Typelib) ?string {
+	err := &GError(0)
+	typelib_ := g_irepository_load_typelib(r.c, typelib.c, 0, &err)
+	if err != 0 {
+		return error(tos3(err.message))
+	}
+	return tos3(typelib_)
+}
 
 pub fn (r &Repository) get_typelib_path(namespace string) string {
 	path := g_irepository_get_typelib_path(r.c, namespace.str)
