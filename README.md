@@ -1,3 +1,3 @@
 # vgobject
 
-[WIP] GObject-introspection bindings generator for V
+GObject-introspection bindings generator for V
