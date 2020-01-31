@@ -1,0 +1,8 @@
+{
+    "name": "vgobject",
+    "version": "0.1.0",
+    "author": ["Don Alfons Nisnoni <donnisnoni.tid3@gmail.com>"],
+    "repo": "https://github.com/vgtk/vgobject",
+    "sources": ["https://vpkg-project.github.io/registry/"],
+    "dependencies": []
+}
