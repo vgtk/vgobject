@@ -1,6 +1,6 @@
 module gi
 
-struct Repository {
+pub struct Repository {
 	c &GIRepository
 }
 
