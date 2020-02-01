@@ -36,3 +36,7 @@ pub fn (fi &FieldInfo) get_type() &TypeInfo {
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
 }
+
+pub fn (fi &FieldInfo) get_cptr() voidptr {
+	return fi.c
+}

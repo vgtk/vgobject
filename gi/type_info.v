@@ -14,7 +14,7 @@ const (
 	ARRAY_TYPE_BYTE_ARRAY = ArrayType(C.GI_ARRAY_TYPE_BYTE_ARRAY)
 )
 
-const (
+pub const (
 	TYPE_TAG_VOID      = TypeTag(C.GI_TYPE_TAG_VOID)
 	TYPE_TAG_BOOLEAN   = TypeTag(C.GI_TYPE_TAG_BOOLEAN)
 	TYPE_TAG_INT8      = TypeTag(C.GI_TYPE_TAG_INT8)
@@ -72,4 +72,12 @@ pub fn (ti &TypeInfo) is_zero_terminated() bool {
 
 pub fn (ti &TypeInfo) get_array_type() ArrayType {
 	return g_type_info_get_array_type(ti.c)
+}
+
+pub fn (ti &TypeInfo) get_cptr() voidptr {
+	return ti.c
+}
+
+pub fn (tt TypeTag) str() string {
+	return tos3(g_type_tag_to_string(tt))
 }

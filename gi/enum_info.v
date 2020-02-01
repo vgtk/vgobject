@@ -37,3 +37,7 @@ pub fn (ei &EnumInfo) get_error_domain() string {
 pub fn (ei &EnumInfo) is_valid() bool {
 	return GI_IS_ENUM_INFO(ei.c)
 }
+
+pub fn (ei &EnumInfo) get_cptr() voidptr {
+	return ei.c
+}

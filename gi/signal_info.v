@@ -33,3 +33,7 @@ pub fn (si &SignalInfo) get_class_closure() &VFuncInfo {
 pub fn (si &SignalInfo) true_stops_emit() bool {
 	return g_signal_info_true_stops_emit(si.c)
 }
+
+pub fn (si &SignalInfo) get_cptr() voidptr {
+	return si.c
+}

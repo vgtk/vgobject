@@ -79,3 +79,7 @@ pub fn (ci &CallableInfo) skip_return() bool {
 pub fn (ci &CallableInfo) is_valid() bool {
 	return GI_IS_CALLABLE_INFO(ci.c)
 }
+
+pub fn (ci &CallableInfo) get_cptr() voidptr {
+	return ci.c
+}

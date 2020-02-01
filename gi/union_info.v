@@ -58,3 +58,7 @@ pub fn (ui &UnionInfo) get_size() u32 {
 pub fn (ui &UnionInfo) get_alignment() u32 {
 	return g_union_info_get_alignment(ui.c)
 }
+
+pub fn (ui &UnionInfo) get_cptr() voidptr {
+	return ui.c
+}

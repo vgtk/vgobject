@@ -91,9 +91,6 @@ pub fn (ii &InterfaceInfo) get_iface_struct() &StructInfo {
 	return &StructInfo(ptr)
 }
 
-
-
-
-
-
-// 
+pub fn (ii &InterfaceInfo) get_cptr() voidptr {
+	return ii.c
+}

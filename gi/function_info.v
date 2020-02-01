@@ -28,7 +28,7 @@ pub fn (fi &FunctionInfo) get_property() &PropertyInfo {
 
 pub fn (fi &FunctionInfo) get_symbol() string {
 	symbol := g_function_info_get_symbol(fi.c)
-	return tos_and_free(symbol)
+	return tos3(symbol)
 }
 
 pub fn (fi &FunctionInfo) get_vfunc() &VFuncInfo {
@@ -48,4 +48,8 @@ pub fn (fi &FunctionInfo) get_vfunc() &VFuncInfo {
 
 pub fn (fi &FunctionInfo) is_valid() bool {
 	return GI_IS_FUNCTION_INFO(fi.c)
+}
+
+pub fn (fi &FunctionInfo) get_cptr() voidptr {
+	return fi.c
 }

@@ -5,3 +5,4 @@ v
 binding_generator
 *.o
 makefile
+vscode_vlang_linter_file.v

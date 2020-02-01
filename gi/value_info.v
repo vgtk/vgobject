@@ -11,3 +11,7 @@ pub fn (vi &ValueInfo) get_value() i64 {
 pub fn (vi &ValueInfo) is_valid() bool {
 	return GI_IS_ENUM_INFO(vi.c)
 }
+
+pub fn (vi &ValueInfo) get_cptr() voidptr {
+	return vi.c
+}

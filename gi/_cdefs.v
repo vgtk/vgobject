@@ -276,6 +276,8 @@ fn C.G_TYPE_IS_DERIVABLE(GType) bool
 fn C.G_TYPE_IS_DEEP_DERIVABLE(GType) bool
 fn C.G_TYPE_IS_INTERFACE(GType) bool
 
+fn C.g_type_tag_to_string(int) charptr
+
 // UTILS
 fn C.g_slist_length(&GSList) int
 fn C.g_slist_free(&GSList)

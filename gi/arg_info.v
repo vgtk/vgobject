@@ -49,6 +49,7 @@ pub fn (ai &ArgInfo) get_scope() ScopeType {
 
 pub fn (ai &ArgInfo) get_type() &TypeInfo {
 	cptr := &GIBaseInfo(g_arg_info_get_type(ai.c))
+	if cptr == 0 { return 0 }
 	ptr := &BaseInfo{cptr}
 	return &TypeInfo(ptr)
 }
@@ -75,4 +76,8 @@ pub fn (ai &ArgInfo) is_return_value() bool {
 
 pub fn (ai &ArgInfo) is_skip() bool {
 	return g_arg_info_is_skip(ai.c)
+}
+
+pub fn (ai &ArgInfo) get_cptr() voidptr {
+	return ai.c
 }

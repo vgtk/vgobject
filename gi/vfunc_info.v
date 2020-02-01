@@ -47,3 +47,7 @@ pub fn (vfi &VFuncInfo) get_invoker() &FunctionInfo {
 //                      		int n_out_args,
 //                      		GIArgument *return_value,
 //                      		GError **error)
+
+pub fn (vfi &VFuncInfo) get_cptr() voidptr {
+	return vfi.c
+}

@@ -53,3 +53,7 @@ pub fn (si &StructInfo) find_method(name string) &FunctionInfo {
 	ptr := &BaseInfo{cptr}
 	return &FunctionInfo(ptr)
 }
+
+pub fn (si &StructInfo) get_cptr() voidptr {
+	return si.c
+}

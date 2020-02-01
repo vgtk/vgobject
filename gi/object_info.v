@@ -151,6 +151,9 @@ pub fn (oi &ObjectInfo) get_unref_function() string {
 	unref_function := g_object_info_get_unref_function(oi.c)
 	return tos3(unref_function)
 }
+pub fn (oi &ObjectInfo) get_cptr() voidptr {
+	return oi.c
+}
 
 // pub fn (oi &ObjectInfo) get_set_value_function() string {
 

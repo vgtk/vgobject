@@ -41,3 +41,7 @@ pub fn (ci &ConstantInfo) get_value() voidptr {
 	}
 
 } 
+
+pub fn (ci &ConstantInfo) get_cptr() voidptr {
+	return ci.c
+}
