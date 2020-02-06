@@ -40,3 +40,9 @@ pub fn (fi &FieldInfo) get_type() &TypeInfo {
 pub fn (fi &FieldInfo) get_cptr() voidptr {
 	return fi.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (fi &FieldInfo) unref() {
+	g_base_info_unref(fi.c)
+}

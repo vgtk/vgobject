@@ -41,3 +41,9 @@ pub fn (tl &Typelib) get_namespace() string {
 	namespace := g_typelib_get_namespace(tl)
 	return tos3(namespace)
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (tl &Typelib) unref() {
+	g_base_info_unref(tl.c)
+}

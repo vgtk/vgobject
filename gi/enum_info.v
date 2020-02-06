@@ -41,3 +41,9 @@ pub fn (ei &EnumInfo) is_valid() bool {
 pub fn (ei &EnumInfo) get_cptr() voidptr {
 	return ei.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ei &EnumInfo) unref() {
+	g_base_info_unref(ei.c)
+}

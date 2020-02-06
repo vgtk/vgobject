@@ -53,3 +53,9 @@ pub fn (fi &FunctionInfo) is_valid() bool {
 pub fn (fi &FunctionInfo) get_cptr() voidptr {
 	return fi.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (fi &FunctionInfo) unref() {
+	g_base_info_unref(fi.c)
+}

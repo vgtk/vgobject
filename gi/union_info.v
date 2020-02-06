@@ -62,3 +62,9 @@ pub fn (ui &UnionInfo) get_alignment() u32 {
 pub fn (ui &UnionInfo) get_cptr() voidptr {
 	return ui.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ui &UnionInfo) unref() {
+	g_base_info_unref(ui.c)
+}

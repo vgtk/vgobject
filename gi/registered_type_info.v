@@ -21,3 +21,9 @@ pub fn (rti &RegisteredTypeInfo) get_g_type() GType {
 pub fn (rti &RegisteredTypeInfo) get_cptr() voidptr {
 	return rti.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (rti &RegisteredTypeInfo) unref() {
+	g_base_info_unref(rti.c)
+}

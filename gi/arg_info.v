@@ -81,3 +81,9 @@ pub fn (ai &ArgInfo) is_skip() bool {
 pub fn (ai &ArgInfo) get_cptr() voidptr {
 	return ai.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ai &ArgInfo) unref() {
+	g_base_info_unref(ai.c)
+}

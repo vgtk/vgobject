@@ -45,3 +45,9 @@ pub fn (ci &ConstantInfo) get_value() voidptr {
 pub fn (ci &ConstantInfo) get_cptr() voidptr {
 	return ci.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ci &ConstantInfo) unref() {
+	g_base_info_unref(ci.c)
+}

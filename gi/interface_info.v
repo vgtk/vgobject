@@ -94,3 +94,9 @@ pub fn (ii &InterfaceInfo) get_iface_struct() &StructInfo {
 pub fn (ii &InterfaceInfo) get_cptr() voidptr {
 	return ii.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ii &InterfaceInfo) unref() {
+	g_base_info_unref(ii.c)
+}

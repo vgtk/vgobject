@@ -83,3 +83,9 @@ pub fn (ci &CallableInfo) is_valid() bool {
 pub fn (ci &CallableInfo) get_cptr() voidptr {
 	return ci.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (ci &CallableInfo) unref() {
+	g_base_info_unref(ci.c)
+}

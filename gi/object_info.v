@@ -161,4 +161,10 @@ pub fn (oi &ObjectInfo) get_cptr() voidptr {
 
 // TODO!!!!!!!!!!!!
 
-// 
+//
+
+/* Inherits from BaseInfo */
+
+pub fn (oi &ObjectInfo) unref() {
+	g_base_info_unref(oi.c)
+}

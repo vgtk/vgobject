@@ -34,10 +34,12 @@ pub fn (pi &PropertyInfo) get_type() &TypeInfo {
 	return &TypeInfo(ptr)
 }
 
-pub fn (pi &PropertyInfo) unref() {
-	g_base_info_unref(pi.c)
-}
-
 pub fn (pi &PropertyInfo) get_cptr() voidptr {
 	return pi.c
+}
+
+/* Inherits from BaseInfo */
+
+pub fn (pi &PropertyInfo) unref() {
+	g_base_info_unref(pi.c)
 }

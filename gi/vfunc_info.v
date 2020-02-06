@@ -51,3 +51,9 @@ pub fn (vfi &VFuncInfo) get_invoker() &FunctionInfo {
 pub fn (vfi &VFuncInfo) get_cptr() voidptr {
 	return vfi.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (vfi &VFuncInfo) unref() {
+	g_base_info_unref(vfi.c)
+}

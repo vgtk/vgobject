@@ -15,3 +15,9 @@ pub fn (vi &ValueInfo) is_valid() bool {
 pub fn (vi &ValueInfo) get_cptr() voidptr {
 	return vi.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (vi &ValueInfo) unref() {
+	g_base_info_unref(vi.c)
+}

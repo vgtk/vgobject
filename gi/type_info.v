@@ -81,3 +81,9 @@ pub fn (ti &TypeInfo) get_cptr() voidptr {
 pub fn (tt TypeTag) str() string {
 	return tos3(g_type_tag_to_string(tt))
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (tt &TypeInfo) unref() {
+	g_base_info_unref(tt.c)
+}

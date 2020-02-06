@@ -57,3 +57,9 @@ pub fn (si &StructInfo) find_method(name string) &FunctionInfo {
 pub fn (si &StructInfo) get_cptr() voidptr {
 	return si.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (si &StructInfo) unref() {
+	g_base_info_unref(si.c)
+}

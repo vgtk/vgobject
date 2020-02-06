@@ -37,3 +37,9 @@ pub fn (si &SignalInfo) true_stops_emit() bool {
 pub fn (si &SignalInfo) get_cptr() voidptr {
 	return si.c
 }
+
+/* Inherits from BaseInfo */
+
+pub fn (si &SignalInfo) unref() {
+	g_base_info_unref(si.c)
+}
