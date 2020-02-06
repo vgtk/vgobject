@@ -34,10 +34,10 @@ pub fn (tl &Typelib) get_symbol(symbol_name string) string {
 	loaded := g_typelib_symbol(tl.c, symbol_name.str, &_symbol)
 	if !loaded { return '' }
 	symbol := charptr(_symbol)
-	return tos_and_free(symbol)
+	return tos3(symbol)
 }
 
 pub fn (tl &Typelib) get_namespace() string {
 	namespace := g_typelib_get_namespace(tl)
-	return tos_and_free(namespace)
+	return tos3(namespace)
 }

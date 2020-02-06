@@ -69,7 +69,7 @@ pub fn (bi &BaseInfo) get_name() string {
 
 pub fn (bi &BaseInfo) get_attribute(name string) string {
 	attribute := g_base_info_get_attribute(bi.c, name.str)
-	return tos_and_free(attribute)
+	return tos3(attribute)
 }
 
 pub fn (bi &BaseInfo) iterate_attributes(cb fn(name, value string)) {

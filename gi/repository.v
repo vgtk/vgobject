@@ -89,7 +89,7 @@ pub fn (r &Repository) require(namespace, version string/* , flags int */) ?&Typ
 		g_irepository_require(r.c, namespace.str, 0, 1, &err)
 	}
 	if err != 0 {
-		return error(tos_and_free(err.message))
+		return error(tos3(err.message))
 	}
 	return &Typelib{typelib}
 }
